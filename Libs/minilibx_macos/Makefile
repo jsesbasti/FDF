@@ -9,7 +9,7 @@ CFLAGS+=-O2 -Wno-deprecated-declarations
 
 all: $(NOM)
 
-$(NOM):: $(OBJ)
+$(NOM)::	$(OBJ)
 	ar -r $(NOM) $(OBJ)
 	ranlib $(NOM)
 

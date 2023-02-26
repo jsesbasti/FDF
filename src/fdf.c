@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/02/26 20:26:16 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/02/27 00:24:51 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,23 @@ int	close_app(t_app *fdf)
 	exit(0);
 }
 
-int	check(char **map)
+int	check(char **argv)
 {
 	const char *ext;
 	char *mapext;
 
 	ext = ".fdf";
-	mapext = ft_strrchr(map[1], '.');
+	mapext = ft_strrchr(argv[1], '.');
 	if ( !mapext || ft_strlen(mapext) != 4)
 	{
 		ft_printf("Map error\n");
 		return (1);
 	}
 	if (ft_strncmp(ext, mapext, 4) != 0)
+	{
+		ft_printf("Map error\n");
 		return (1);
+	}
 	return (0);
 }
 
@@ -67,6 +70,8 @@ int	main(int argc, char **argv)
 	{
 		if (argc < 2)
 			ft_printf("You need to give a map\n");
+		else
+			ft_printf("Please give only one map\n");
 		return (1);
 	}
 	else
