@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/02/27 00:24:52 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/03/03 04:13:22 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LIBC = ar -rcs
 # =============
 
 SRC	=	src/fdf.c 			\
-		#src/print_map.c 	\
+		src/fdf_utils.c  	\
 		#src/check_map.c		\
 
 # -------------

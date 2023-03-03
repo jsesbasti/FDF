@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/03/01 04:09:34 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/03/03 04:13:21 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	close_app(t_app *fdf)
 	exit(0);
 }
 
-int	check(char **argv)
+int	check(char *argv)
 {
-	char *ext;
-	char *mapext;
+	char	*ext;
+	char	*mapext;
 
 	ext = ".fdf";
-	mapext = ft_strrchr(argv[1], '.');
-	if ( !mapext || ft_strlen(mapext) != 4)
+	mapext = ft_strrchr(argv, '.');
+	if (!mapext || ft_strlen(mapext) != 4)
 	{
 		ft_printf("Map error\n");
 		return (1);
@@ -56,7 +56,8 @@ int	init(t_app *fdf)
 		return (1);
 	fdf->scrn.size_x = 1920;
 	fdf->scrn.size_y = 1080;
-	fdf->win = mlx_new_window(fdf->mlx, fdf->scrn.size_x, fdf->scrn.size_y, "FdF");
+	fdf->win = mlx_new_window(fdf->mlx, fdf->scrn.size_x, \
+		fdf->scrn.size_y, "FdF");
 	if (!fdf->win)
 		return (1);
 	return (0);
@@ -76,9 +77,11 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		if (check(argv) == 1)
+		if (check(argv[1]) == 1)
 			return (1);
 		if (init(&fdf) == 1)
+			return (1);
+		if (start_map(&fdf.map, argv[1]) == 1)
 			return (1);
 		mlx_key_hook(fdf.win, esc, &fdf);
 		mlx_hook(fdf.win, 17, 0, close_app, &fdf);
