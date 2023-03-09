@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/03/03 04:13:22 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/03/09 13:48:32 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MLX_M		= Libs/minilibx_macos
 # -------------
 RM = rm -rf
 MP = mkdir -p
-CFLAGS = -Werror -Wextra -Wall -O2 -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -O2 #-fsanitize=address
 MLX_FLAGS = -lmlx -L $(MLX_M) -framework OpenGL -framework AppKit
 LIBC = ar -rcs
 # =============

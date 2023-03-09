@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/03/03 04:13:24 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:48:35 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef struct s_app
 	t_map	map;
 }	t_app;
 
-int		start_map(t_map *map, char *file);
+int			start_map(t_map *map, char *file);
+
+static int	load_points(char *line, t_map *map, int numline);
+
 
 #endif
