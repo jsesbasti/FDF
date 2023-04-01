@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/03/09 13:48:27 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/01 05:17:21 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int	init(t_app *fdf)
 		return (1);
 	fdf->scrn.size_x = 1920;
 	fdf->scrn.size_y = 1080;
+	fdf->map.limits.axis[X] = 0;
+	fdf->map.limits.axis[Y] = 0;
+	fdf->map.zmin = 0;
+	fdf->halfx = fdf->scrn.size_x / 2;
+	fdf->halfy = fdf->scrn.size_y / 2;
 	fdf->win = mlx_new_window(fdf->mlx, fdf->scrn.size_x, \
 		fdf->scrn.size_y, "FdF");
 	if (!fdf->win)
@@ -83,6 +88,7 @@ int	main(int argc, char **argv)
 			return (1);
 		if (start_map(&fdf.map, argv[1]) == 1)
 			return (1);
+		print_points(&fdf);
 		mlx_key_hook(fdf.win, esc, &fdf);
 		mlx_hook(fdf.win, 17, 0, close_app, &fdf);
 		mlx_loop(fdf.mlx);

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/03/09 13:48:35 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/01 05:17:21 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,20 @@
 # include "../Libs/minilibx_macos/mlx.h"
 # include <fcntl.h>
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
 typedef struct s_point
 {
-	float	axis[3];
+	int		axis[3];
 	int		color;
 	int		hex;
-	float	polar[2];
 }	t_point;
 
 typedef struct s_map
@@ -36,6 +44,8 @@ typedef struct s_map
 	t_point	*points;
 	int		len;
 	char	*mem;
+	char	*line;
+	int		zmin;
 }	t_map;
 
 typedef struct s_win
@@ -48,13 +58,19 @@ typedef struct s_app
 {
 	void	*mlx;
 	void	*win;
+	int		halfx;
+	int		halfy;
 	t_win	scrn;
 	t_map	map;
 }	t_app;
 
+
 int			start_map(t_map *map, char *file);
 
-static int	load_points(char *line, t_map *map, int numline);
+int			load_points(char *line, t_map *map, int numline);
 
+void		terminate(int errcod);
+
+void		print_points(t_app *fdf);
 
 #endif

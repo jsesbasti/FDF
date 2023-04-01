@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:10 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/03/09 13:48:26 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/01 03:30:07 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,27 @@ void	terminate(int errcod)
 
 static	void	map_get_points(t_map *map)
 {
-	int			i;
+	static int	i = 0;
 	char		*line;
 	char		*last_line;
 	static int	num_points = 0;
 	static int	num_line = 0;
 
-	i = -1;
 	line = NULL;
 	last_line = map->mem;
-	map->points = ft_calloc (map->len, sizeof(t_point));
-	while (++i)
+	map->points = ft_calloc(map->len, sizeof(t_point));
+	while (i >= 0)
 	{
 		if (map->mem[i] == '\n' || map->mem[i] == '\0')
 		{
 			free (line);
 			line = ft_substr(last_line, 0, &map->mem[i] - last_line);
 			last_line = &map->mem[i + 1];
-			num_points += load_points(line, map, num_line++);
-			if (map[i] == '\0')
+			num_points = load_points(line, map, num_line++);
+			if (map->mem[i] == '\0')
 				break ;
 		}
+		i++;
 	}
 	free (line);
 }
@@ -55,7 +55,7 @@ void	map_size(t_map *map)
 	{
 		if (map->mem[i] == '\n' && map->mem[i + 1] == '\0')
 			break ;
-		if (ft_isalnum(map->mem[i]) && \
+		if ((ft_isalnum(map->mem[i]) || map->mem[i] == '-') && \
 			(map->mem[i + 1] == ' ' || map->mem[i + 1] == '\n' || \
 			map->mem[i + 1] == '\0'))
 			num_elems++;
@@ -101,7 +101,7 @@ char	*ft_read(int fd)
 
 int	start_map(t_map *map, char *file)
 {
-	int	fd;
+	int			fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 2)
@@ -109,8 +109,8 @@ int	start_map(t_map *map, char *file)
 	map->mem = ft_read(fd);
 	if (!map->mem)
 		return (1);
-	map->limits.axis[X] = 0;
 	map_size(map);
+	map_get_points(map);
 	ft_printf("%s", map->mem);
 	close(fd);
 	return (0);
