@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/01 05:39:21 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:30:28 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	dbl_free(char **str)
 	free(str);
 }
 
+// POR FAVOR, NO PONER "STATIC INT I" POR LO QUE MAS QUIERAS, DA SEG_FAULT.
 int	load_points(char *line, t_map *map, int numline)
 {
-	const char	**splited;
 	int			i;
+	const char	**splited;
 	static int	point_index = 0;
 
 	splited = (const char **)ft_split(line, ' ');
@@ -57,6 +58,18 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	resize(t_map *map)
+{
+	if (map->len <= 100)
+		map->resize = 80;
+	if (map->len > 100 && map->len <= 25000)
+		map->resize = 20;
+	if (map->len > 25000 && map->len <= 100000)
+		map->resize = 5;
+	if (map->len > 100000)
+		map->resize = 1;
+}
+
 void	print_points(t_app *fdf)
 {
 	static int	i = 0;
@@ -65,13 +78,13 @@ void	print_points(t_app *fdf)
 	img.img = mlx_new_image(fdf->mlx, 1, 1);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 			&img.line_length, &img.endian);
+	resize(&fdf->map);
 	while (i < fdf->map.len)
 	{
-		my_mlx_pixel_put(&img, 0, \
-				0, 0xFFFFFF);
+		my_mlx_pixel_put(&img, 0, 0, 0xFFFFFF);
 		mlx_put_image_to_window(fdf->mlx, fdf->win, img.img, \
-				fdf->halfx + fdf->map.points[i].axis[X] * 50, \
-				fdf->halfy + fdf->map.points[i].axis[Y] * 50);
+				fdf->halfx + fdf->map.points[i].axis[X] * fdf->map.resize, \
+				fdf->halfy + fdf->map.points[i].axis[Y] * fdf->map.resize);
 		i++;
 	}
 }

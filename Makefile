@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/03/31 22:43:41 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/04/03 17:18:50 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ LIBC = ar -rcs
 
 SRC	=	src/fdf.c 			\
 		src/fdf_utils.c  	\
-		src/fdf_utils2.c		\
+		src/fdf_utils2.c	\
+		src/draw_utils.c	\
 
 # -------------
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
@@ -66,12 +67,10 @@ clean:
 	@$(MAKE) clean -C $(PRINTF_M)
 	@$(MAKE) clean -C $(MLX_M)
 	$(RM) $(OBJ_DIR)
-	$(RM) $(NAME)
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIB_M)
 	@$(MAKE) fclean -C $(PRINTF_M)
-	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
 re:

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:10 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/01 03:30:07 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:31:25 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@
 
 void	terminate(int errcod)
 {
+	if (errcod == 2)
+		ft_printf("Limits error.");
+	if (errcod == 3)
+		ft_printf("Split error");
 	exit(errcod);
 }
 
 static	void	map_get_points(t_map *map)
 {
 	static int	i = 0;
-	char		*line;
-	char		*last_line;
 	static int	num_points = 0;
 	static int	num_line = 0;
+	char		*line;
+	char		*last_line;
 
 	line = NULL;
 	last_line = map->mem;
@@ -38,6 +42,8 @@ static	void	map_get_points(t_map *map)
 			line = ft_substr(last_line, 0, &map->mem[i] - last_line);
 			last_line = &map->mem[i + 1];
 			num_points = load_points(line, map, num_line++);
+			if (num_points == -1)
+				exit(3);
 			if (map->mem[i] == '\0')
 				break ;
 		}
@@ -55,7 +61,7 @@ void	map_size(t_map *map)
 	{
 		if (map->mem[i] == '\n' && map->mem[i + 1] == '\0')
 			break ;
-		if ((ft_isalnum(map->mem[i]) || map->mem[i] == '-') && \
+		if (ft_isalnum(map->mem[i]) && \
 			(map->mem[i + 1] == ' ' || map->mem[i + 1] == '\n' || \
 			map->mem[i + 1] == '\0'))
 			num_elems++;
@@ -63,14 +69,14 @@ void	map_size(t_map *map)
 		{
 			map->limits.axis[Y]++;
 			if (map->limits.axis[X] != num_elems && map->limits.axis[X] != 0)
-				terminate(1);
+				terminate(2);
 			else
 				map->limits.axis[X] = num_elems;
 			num_elems = 0;
 		}
 	}
 	if (num_elems > 0 && (map->limits.axis[X] != num_elems))
-		terminate(1);
+		terminate(2);
 	map->limits.axis[Y]++;
 	map->len = map->limits.axis[X] * map->limits.axis[Y];
 }
