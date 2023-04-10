@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/03 17:30:28 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:02:47 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,48 @@ int	load_points(char *line, t_map *map, int numline)
 	return (i);
 }
 
+void	set_color(char *buffer, int endian, int color, int alpha)
+{
+	if (endian == 1)
+	{
+		buffer[0] = alpha;
+		buffer[1] = (color >> 16) & 0xFF;
+		buffer[2] = (color >> 8) & 0xFF;
+		buffer[3] = (color) & 0xFF;
+	}
+	else
+	{
+		buffer[0] = (color) & 0xFF;
+		buffer[1] = (color >> 8) & 0xFF;
+		buffer[2] = (color >> 16) & 0xFF;
+		buffer[3] = alpha;
+	}
+}
+
+int	my_putpixel(t_app *fdf, t_point pixel)
+{
+	int	mypixel;
+	int	alpha;
+
+	alpha = 0;
+	//if (pixel.axis[X] < MENU_WIDTH)
+	//	alpha = -10;
+	if (pixel.axis[X] >= fdf->scrn.size_x || pixel.axis[Y] >= fdf->scrn.size_y || \
+		pixel.axis[X] < 0 || pixel.axis[Y] < 0)
+		return (1);
+	mypixel = ((int)pixel.axis[Y] * fdf->scrn.size_x * 4) + ((int)pixel.axis[X] * 4);
+	if (fdf->bitmap.bitxpixel != 32)
+		pixel.color = mlx_get_color_value(fdf->mlx, pixel.color);
+	set_color(&fdf->bitmap.addr[mypixel], \
+		fdf->bitmap.endian, pixel.color, alpha);
+	return (0);
+}
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * data->line_length + x * (data->bitxpixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -76,7 +113,7 @@ void	print_points(t_app *fdf)
 	t_data		img;
 
 	img.img = mlx_new_image(fdf->mlx, 1, 1);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
+	img.addr = mlx_get_data_addr(img.img, &img.bitxpixel, \
 			&img.line_length, &img.endian);
 	resize(&fdf->map);
 	while (i < fdf->map.len)

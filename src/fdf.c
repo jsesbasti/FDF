@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/03 17:31:22 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:55:11 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		if (check(argv[1]) == 1)
+		if (check(argv[1]))
 			return (1);
-		if (init(&fdf) == 1)
+		if (init(&fdf))
 			return (1);
-		if (start_map(&fdf.map, argv[1]) == 1)
+		if (start_map(&fdf.map, argv[1]))
 			return (1);
 		print_points(&fdf);
 		mlx_key_hook(fdf.win, esc, &fdf);

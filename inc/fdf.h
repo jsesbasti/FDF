@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/03 17:32:06 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:01:47 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_data
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bitxpixel;
 	int		line_length;
 	int		endian;
 }	t_data;
@@ -64,6 +64,7 @@ typedef struct s_app
 	int		halfy;
 	t_win	scrn;
 	t_map	map;
+	t_data	bitmap;
 }	t_app;
 
 
@@ -74,5 +75,11 @@ int			load_points(char *line, t_map *map, int numline);
 void		terminate(int errcod);
 
 void		print_points(t_app *fdf);
+
+int			my_putpixel(t_app *fdf, t_point pixel);
+
+void		check_points(t_app *fdf);
+
+int			draw_line(t_app *fdf, t_point start, t_point end);
 
 #endif
