@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 23:18:53 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:53:29 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ int	init(t_app *fdf)
 	fdf->map.angz = 45;
 	fdf->map.angy = 0;
 	fdf->map.resize = 2.5;
-	fdf->map.transx = 0;
-	fdf->map.transy = 0;
+	fdf->map.transx = 1;
+	fdf->map.transy = 1;
 	fdf->map.res = 0;
+	fdf->event = 0;
 	fdf->win = mlx_new_window(fdf->mlx, WIDTH, \
 		HEIGHT, "FdF");
 	if (!fdf->win)

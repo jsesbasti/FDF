@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 22:59:53 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:53:20 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # define Z 2
 # define HEIGHT 1080
 # define WIDTH 1920
+# define RED 0xFF0000
+# define WHITE 0xFFFFFF
+# define BLUE 0x0000FF
+# define GREEN 0x00FF00
 
 # include "../Libs/Libft/libft.h"
 # include "../Libs/printf/ft_printf.h"
@@ -64,9 +68,10 @@ typedef struct s_app
 {
 	void	*mlx;
 	void	*win;
-	int		last_y;
-	int		last_x;
+	float	last_y;
+	float	last_x;
 	int		button_pressed;
+	int		event;
 	t_map	map;
 	t_data	bitmap;
 }	t_app;

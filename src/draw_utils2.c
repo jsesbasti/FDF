@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 07:39:43 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 23:06:55 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:29:57 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ void	create_copy(t_app *fdf)
 void	load_color(int max, int min, t_point *point)
 {
 	point->paint = 1;
-	point->color = 0xFFFFFF;
+	point->color = WHITE;
 	if (point->hex_color > 0)
 	{
 		point->color = point->hex_color;
 		return ;
 	}
 	if (point->axis[Z] == max)
-		point->color = 0xFF0000;
+		point->color = RED;
 	else if (point->axis[Z] == 0)
-		point->color = 0xFFFFFF;
+		point->color = WHITE;
 	else if (point->axis[Z] == min && min != 0)
-		point->color = 0x0000FF;
+		point->color = BLUE;
 	else if (point->axis[Z] > 0)
-		point->color = gradient(0xFFFFFF, 0xFF0000, \
+		point->color = gradient(WHITE, RED, \
 		max, point->axis[Z]);
 	else
-		point->color = gradient(0x0000FF, 0xFFFF, \
+		point->color = gradient(BLUE, WHITE, \
 		-min, - (min - point->axis[Z]));
 }
 
