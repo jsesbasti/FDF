@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 20:26:39 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:48:22 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	esc(int key, t_app *fdf)
 {
-	ft_printf("%d", key);
 	if (key == 53)
 	{
 		mlx_destroy_image(fdf->mlx, fdf->bitmap.img);
@@ -67,7 +66,7 @@ int	init(t_app *fdf)
 	fdf->map.angx = 45;
 	fdf->map.angz = 45;
 	fdf->map.angy = 0;
-	fdf->map.resize = 1;
+	fdf->map.resize = 2.5;
 	fdf->map.res = 0;
 	fdf->win = mlx_new_window(fdf->mlx, WIDTH, \
 		HEIGHT, "FdF");
@@ -101,7 +100,6 @@ int	main(int argc, char **argv)
 		mlx_mouse_hook(fdf.win, mouse_events, &fdf);
 		mlx_mouse_hook(fdf.win, mouse_events, &fdf);
 		mlx_hook(fdf.win, 17, 0, close_app, &fdf);
-		// mlx_mouse_kook();
 		mlx_loop(fdf.mlx);
 	}
 	return (0);

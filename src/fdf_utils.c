@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:10 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 08:48:27 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:45:02 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int	start_map(t_map *map, char *file)
 	map_size(map);
 	map_get_points(map);
 	colorize(map);
-	ft_printf("%s", map->mem);
 	close(fd);
 	return (0);
 }

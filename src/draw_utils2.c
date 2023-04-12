@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 07:39:43 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 19:59:49 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:54:34 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@ void	resize_z(int key, t_map *map)
 {
 	static int	i = 0;
 
-	if (key == 126 && i <= 10 && (map->resize - 0.5 != 0))
+	if (key == 126 && i < 2)
 	{
-		map->resize -= 0.5;
+		map->resize *= 0.5;
 		i++;
 	}
-	if (key == 125 && i >= -10)
+	if (key == 125 && i > -5)
 	{
-		map->resize += 0.5;
+		map->resize /= 0.5;
 		i--;
 	}
 

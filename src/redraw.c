@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:54:08 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 20:29:54 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:57:06 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	mouse_events(int button, int x, int y, t_app *fdf)
 {
 	if (button == 5 && x)
 	{
-		fdf->map.res *= 1.25;
+		fdf->map.res *= 1.1;
 		check_points(fdf);
 	}
 	if (button == 4 && y)
 	{
-		fdf->map.res *= 0.75;
+		fdf->map.res *= 0.9;
 		check_points(fdf);
 	}
 	return (0);
