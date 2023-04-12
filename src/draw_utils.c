@@ -6,11 +6,24 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:04:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/10 17:05:19 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:23:45 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	colorize(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->len)
+	{
+		load_color((int)map->limits.axis[Z], map->zmin, \
+		&map->points[i]);
+		i++;
+	}
+}
 
 int	ft_round(double num)
 {
@@ -43,13 +56,11 @@ int	gradient(int startcolor, int endcolor, int len, int pix)
 
 int	draw_line(t_app *fdf, t_point start, t_point end)
 {
-	t_point	delta;
-	t_point	pixel;
+	t_point		delta;
+	t_point		pixel;
 	int			pixels;
 	int			len;
 
-	//if (valid_pixel(start) == 0 && valid_pixel(end) == 0)
-	//	return (1);
 	delta.axis[X] = end.axis[X] - start.axis[X];
 	delta.axis[Y] = end.axis[Y] - start.axis[Y];
 	pixels = sqrt((delta.axis[X] * delta.axis[X]) + \
@@ -62,7 +73,7 @@ int	draw_line(t_app *fdf, t_point start, t_point end)
 	while (pixels > 0)
 	{
 		pixel.color = gradient(start.color, end.color, len, len - pixels);
-		my_putpixel(fdf, pixel);
+		my_mlx_pixel_put(&fdf->bitmap, pixel.axis[X], pixel.axis[Y], pixel.color);
 		pixel.axis[X] += delta.axis[X];
 		pixel.axis[Y] += delta.axis[Y];
 		pixels = pixels - 1;
@@ -72,13 +83,22 @@ int	draw_line(t_app *fdf, t_point start, t_point end)
 
 void	check_points(t_app *fdf)
 {
-	static int	i = 0;
+	int	i;
 
+	i = 0;
+	redraw(fdf);
+	create_copy(fdf);
+	check_z(&fdf->map);
+	rotate(&fdf->map);
+	resize(&fdf->map);
 	while (i < fdf->map.len)
 	{
-		if (fdf->map.points[i].axis[X] && fdf->map.points[i + 1].axis[X] && \
-			fdf->map.points[i].axis[X] == fdf->map.points[i + 1].axis[X])
-			draw_line(fdf, fdf->map.points[i], fdf->map.points[i + 1]);
+		if ((i + 1 < fdf->map.len) && (fdf->map.points[i].axis[Y] == fdf->map.points[i + 1].axis[Y]))
+			draw_line(fdf, fdf->map.copy[i], fdf->map.copy[i + 1]);
+		if ((i + fdf->map.limits.axis[X]) < fdf->map.len)
+			draw_line(fdf, fdf->map.copy[i], \
+				fdf->map.copy[i + (int)fdf->map.limits.axis[X]]);
 		i++;
 	}
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bitmap.img, 0, 0);
 }

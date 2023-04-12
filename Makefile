@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/04/10 14:25:28 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/04/12 19:00:13 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MLX_M		= Libs/minilibx_macos
 # -------------
 RM = rm -rf
 MP = mkdir -p
-CFLAGS = -Werror -Wextra -Wall -O2 #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -O2 -fsanitize=address
 MLX_FLAGS = -lmlx -L $(MLX_M) -framework OpenGL -framework AppKit
 LIBC = ar -rcs
 # =============
@@ -38,6 +38,9 @@ SRC	=	src/fdf.c 			\
 		src/fdf_utils.c  	\
 		src/fdf_utils2.c	\
 		src/draw_utils.c	\
+		src/draw_utils2.c	\
+		src/rot.c			\
+		src/redraw.c		\
 
 # -------------
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))

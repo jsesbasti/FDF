@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/10 16:55:11 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:26:39 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 int	esc(int key, t_app *fdf)
 {
+	ft_printf("%d", key);
 	if (key == 53)
 	{
+		mlx_destroy_image(fdf->mlx, fdf->bitmap.img);
 		mlx_destroy_window(fdf->mlx, fdf->win);
 		exit(0);
+	}
+	if (key == 126 || key == 125)
+	{
+		resize_z(key, &fdf->map);
+		check_points(fdf);
 	}
 	return (1);
 }
@@ -54,15 +61,16 @@ int	init(t_app *fdf)
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 		return (1);
-	fdf->scrn.size_x = 1920;
-	fdf->scrn.size_y = 1080;
 	fdf->map.limits.axis[X] = 0;
 	fdf->map.limits.axis[Y] = 0;
 	fdf->map.zmin = 0;
-	fdf->halfx = fdf->scrn.size_x / 2;
-	fdf->halfy = fdf->scrn.size_y / 2;
-	fdf->win = mlx_new_window(fdf->mlx, fdf->scrn.size_x, \
-		fdf->scrn.size_y, "FdF");
+	fdf->map.angx = 45;
+	fdf->map.angz = 45;
+	fdf->map.angy = 0;
+	fdf->map.resize = 1;
+	fdf->map.res = 0;
+	fdf->win = mlx_new_window(fdf->mlx, WIDTH, \
+		HEIGHT, "FdF");
 	if (!fdf->win)
 		return (1);
 	return (0);
@@ -90,7 +98,10 @@ int	main(int argc, char **argv)
 			return (1);
 		print_points(&fdf);
 		mlx_key_hook(fdf.win, esc, &fdf);
+		mlx_mouse_hook(fdf.win, mouse_events, &fdf);
+		mlx_mouse_hook(fdf.win, mouse_events, &fdf);
 		mlx_hook(fdf.win, 17, 0, close_app, &fdf);
+		// mlx_mouse_kook();
 		mlx_loop(fdf.mlx);
 	}
 	return (0);

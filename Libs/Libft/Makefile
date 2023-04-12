@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/18 17:56:46 by jsebasti          #+#    #+#              #
-#    Updated: 2023/02/03 11:08:55 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/04/12 09:44:53 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRCS	=	ft_atoi.c \
 			ft_putchar_fd.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
-			ft_putnbr_fd.c
+			ft_putnbr_fd.c \
+			ft_fatoi.c
 
 BONUS_S = 	ft_lstnew.c \
 		ft_lstadd_front.c \

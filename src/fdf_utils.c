@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:10 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/03 17:31:25 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 08:48:27 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 void	terminate(int errcod)
 {
 	if (errcod == 2)
-		ft_printf("Limits error.");
+		ft_printf("Limits error.\n");
 	if (errcod == 3)
-		ft_printf("Split error");
+		ft_printf("Split error.\n");
 	exit(errcod);
 }
 
@@ -117,6 +117,7 @@ int	start_map(t_map *map, char *file)
 		return (1);
 	map_size(map);
 	map_get_points(map);
+	colorize(map);
 	ft_printf("%s", map->mem);
 	close(fd);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:51:03 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/01/27 14:24:25 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 09:45:07 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 }	t_list;
 
 int		ft_atoi(const char *str, int *temp);
+int		ft_fatoi(const char *str, float *temp);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
