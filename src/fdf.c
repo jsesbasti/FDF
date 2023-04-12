@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 20:48:22 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:18:53 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	init(t_app *fdf)
 	fdf->map.angz = 45;
 	fdf->map.angy = 0;
 	fdf->map.resize = 2.5;
+	fdf->map.transx = 0;
+	fdf->map.transy = 0;
 	fdf->map.res = 0;
 	fdf->win = mlx_new_window(fdf->mlx, WIDTH, \
 		HEIGHT, "FdF");
@@ -98,8 +100,9 @@ int	main(int argc, char **argv)
 		print_points(&fdf);
 		mlx_key_hook(fdf.win, esc, &fdf);
 		mlx_mouse_hook(fdf.win, mouse_events, &fdf);
-		mlx_mouse_hook(fdf.win, mouse_events, &fdf);
 		mlx_hook(fdf.win, 17, 0, close_app, &fdf);
+		mlx_hook(fdf.win, 6, 0, mouse_move_hook, &fdf);
+		mlx_hook(fdf.win, 5, 0, mouse_release_hook, &fdf);
 		mlx_loop(fdf.mlx);
 	}
 	return (0);

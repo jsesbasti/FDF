@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 07:39:43 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 20:54:34 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:06:55 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	load_color(int max, int min, t_point *point)
 	if (point->axis[Z] == max)
 		point->color = 0xFF0000;
 	else if (point->axis[Z] == 0)
-		point->color = 0x00FF00;
+		point->color = 0xFFFFFF;
 	else if (point->axis[Z] == min && min != 0)
 		point->color = 0x0000FF;
 	else if (point->axis[Z] > 0)

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 20:15:13 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:25:05 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	resize(t_map *map)
 		map->copy[i].axis[Y] *= map->res;
 		map->copy[i].axis[X] += (WIDTH / 2);
 		map->copy[i].axis[Y] += (HEIGHT / 2);
-
+		map->copy[i].axis[X] += map->transx;
+		map->copy[i].axis[Y] += map->transy;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 20:29:18 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:59:53 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_map
 	int		zmin;
 	float	res;
 	float	resize;
+	float	transx;
+	float	transy;
 	char	*mem;
 	char	*line;
 	int		angx;
@@ -62,6 +64,9 @@ typedef struct s_app
 {
 	void	*mlx;
 	void	*win;
+	int		last_y;
+	int		last_x;
+	int		button_pressed;
 	t_map	map;
 	t_data	bitmap;
 }	t_app;
@@ -112,6 +117,12 @@ void	create_copy(t_app *fdf);
 void	redraw(t_app *fdf);
 
 int		mouse_events(int button, int x, int y, t_app *fdf);
+
+int 	mouse_press_hook(int button, int x, int y, t_app *fdf);
+
+int 	mouse_move_hook(int x, int y, t_app *fdf);
+
+int 	mouse_release_hook(int button, int x, int y, t_app *fdf);
 
 # define COS cos(30 * (M_PI / 180))
 # define SIN sin(30 * (M_PI / 180))
