@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 23:53:20 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 05:49:22 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ typedef struct s_map
 	float	transy;
 	char	*mem;
 	char	*line;
-	int		angx;
-	int		angy;
-	int		angz;
+	float	angx;
+	float	angy;
+	float	angz;
 }	t_map;
 
 typedef struct s_app
@@ -72,12 +72,27 @@ typedef struct s_app
 	float	last_x;
 	int		button_pressed;
 	int		event;
+	int		key;
+	int		inv;
 	t_map	map;
 	t_data	bitmap;
 }	t_app;
 
+void	check_cntrl(int key, t_app *fdf);
+
+int		esc(int key, t_app *fdf);
+
+int		close_app(t_app *fdf);
+
+void	iso(t_app *fdf);
+
+void	orto(t_app *fdf);
+
+int		add_rot(t_app *fdf);
 
 int		start_map(t_map *map, char *file);
+
+void	map_init(t_app *fdf);
 
 int		load_points(char *line, t_map *map, int numline);
 

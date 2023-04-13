@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/04/12 19:00:13 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/04/13 05:01:51 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRC	=	src/fdf.c 			\
 		src/draw_utils2.c	\
 		src/rot.c			\
 		src/redraw.c		\
+		src/init.c			\
+		src/dyn_rot.c
 
 # -------------
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))

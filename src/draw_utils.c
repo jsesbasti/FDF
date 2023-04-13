@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:04:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 19:23:45 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 01:58:47 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	draw_line(t_app *fdf, t_point start, t_point end)
 	while (pixels > 0)
 	{
 		pixel.color = gradient(start.color, end.color, len, len - pixels);
-		my_mlx_pixel_put(&fdf->bitmap, pixel.axis[X], pixel.axis[Y], pixel.color);
+		my_mlx_pixel_put(&fdf->bitmap, pixel.axis[X], \
+			pixel.axis[Y], pixel.color);
 		pixel.axis[X] += delta.axis[X];
 		pixel.axis[Y] += delta.axis[Y];
 		pixels = pixels - 1;
@@ -93,7 +94,8 @@ void	check_points(t_app *fdf)
 	resize(&fdf->map);
 	while (i < fdf->map.len)
 	{
-		if ((i + 1 < fdf->map.len) && (fdf->map.points[i].axis[Y] == fdf->map.points[i + 1].axis[Y]))
+		if ((i + 1 < fdf->map.len) && (fdf->map.points[i].axis[Y] == \
+			fdf->map.points[i + 1].axis[Y]))
 			draw_line(fdf, fdf->map.copy[i], fdf->map.copy[i + 1]);
 		if ((i + fdf->map.limits.axis[X]) < fdf->map.len)
 			draw_line(fdf, fdf->map.copy[i], \

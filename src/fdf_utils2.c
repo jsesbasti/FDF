@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 22:25:05 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 04:16:51 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	resize(t_map *map)
 {
-	int	i = 0;
-	int	modmap;
+	int		i;
+	float	modmap;
 
+	i = 0;
 	if (map->res == 0)
 	{
-		modmap = sqrt(pow(map->limits.axis[Y], 2) + pow(map->limits.axis[X], 2));
+		modmap = sqrt(pow(map->limits.axis[Y], 2) + \
+			pow(map->limits.axis[X], 2));
 		map->res = HEIGHT / modmap;
 	}
 	while (i < map->len)
