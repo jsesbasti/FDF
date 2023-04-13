@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 06:38:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/13 04:16:51 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:45:38 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,16 @@ void	resize(t_map *map)
 		modmap = sqrt(pow(map->limits.axis[Y], 2) + \
 			pow(map->limits.axis[X], 2));
 		map->res = HEIGHT / modmap;
+		if (map->res < 1.5)
+			map->res = 1.5;
 	}
 	while (i < map->len)
 	{
-		map->copy[i].axis[X] *= map->res;
-		map->copy[i].axis[Y] *= map->res;
+		if (map->res > 1.5)
+		{
+			map->copy[i].axis[X] *= map->res;
+			map->copy[i].axis[Y] *= map->res;
+		}
 		map->copy[i].axis[X] += (WIDTH / 2);
 		map->copy[i].axis[Y] += (HEIGHT / 2);
 		map->copy[i].axis[X] += map->transx;

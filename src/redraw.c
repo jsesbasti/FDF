@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:54:08 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/13 02:56:16 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:36:44 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	mouse_events(int button, int x, int y, t_app *fdf)
 
 int	mouse_move_hook(int x, int y, t_app *fdf)
 {
-	if (fdf->button_pressed)
+	if (fdf->button_pressed == 1)
 	{
 		if (x < fdf->last_x)
 			fdf->map.transx -= 5;

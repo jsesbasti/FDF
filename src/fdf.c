@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:02 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/13 05:55:19 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:37:15 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init(t_app *fdf)
 	if (!fdf->mlx)
 		return ;
 	map_init(fdf);
+	fdf->button_pressed = 0;
 	fdf->event = 0;
 	fdf->key = 0;
 	fdf->inv = 0;
