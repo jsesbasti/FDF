@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/04/13 05:01:51 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/04/13 18:07:20 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,20 +29,21 @@ MLX_M		= Libs/minilibx_macos
 # -------------
 RM = rm -rf
 MP = mkdir -p
-CFLAGS = -Werror -Wextra -Wall -O2 -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -O2 #-fsanitize=address
 MLX_FLAGS = -lmlx -L $(MLX_M) -framework OpenGL -framework AppKit
 LIBC = ar -rcs
 # =============
 
-SRC	=	src/fdf.c 			\
-		src/fdf_utils.c  	\
-		src/fdf_utils2.c	\
-		src/draw_utils.c	\
-		src/draw_utils2.c	\
-		src/rot.c			\
-		src/redraw.c		\
-		src/init.c			\
-		src/dyn_rot.c
+SRC	=	src/fdf.c 				\
+		src/fdf_utils.c  		\
+		src/draw_map.c			\
+		src/draw_utils.c		\
+		src/draw_utils2.c		\
+		src/rotations.c			\
+		src/read_and_load.c		\
+		src/init_and_views.c	\
+		src/dyn_rot.c			\
+		src/events_and_redraw.c	\
 
 # -------------
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))

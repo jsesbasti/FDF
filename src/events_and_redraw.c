@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redraw.c                                           :+:      :+:    :+:   */
+/*   events_and_redraw.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:54:08 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/13 06:36:44 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:07:32 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,22 @@ int	mouse_events(int button, int x, int y, t_app *fdf)
 
 int	mouse_move_hook(int x, int y, t_app *fdf)
 {
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+	{
+		if (fdf->button_pressed)
+			fdf->button_pressed = 2;
+		return (0);
+	}
 	if (fdf->button_pressed == 1)
 	{
 		if (x < fdf->last_x)
-			fdf->map.transx -= 5;
+			fdf->map.transx -= 6;
 		if (x > fdf->last_x)
-			fdf->map.transx += 5;
+			fdf->map.transx += 6;
 		if (y > fdf->last_y)
-			fdf->map.transy += 5;
+			fdf->map.transy += 6;
 		if (y < fdf->last_y)
-			fdf->map.transy -= 5;
+			fdf->map.transy -= 6;
 		check_points(fdf);
 		fdf->last_x = x;
 		fdf->last_y = y;
@@ -105,6 +111,6 @@ void	redraw(t_app *fdf)
 	{
 		j = -1;
 		while (++j < WIDTH)
-			my_mlx_pixel_put(&fdf->bitmap, j, i, 0x000000);
+			my_mlx_pixel_put(&fdf->bitmap, j, i, 0x515151);
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rot.c                                              :+:      :+:    :+:   */
+/*   rotations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:27:25 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/12 19:25:47 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:07:37 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,6 @@ void	rotate_z(t_map *map, int ang)
 		(p.axis[Y] * sinr);
 		map->copy[i].axis[Y] = (p.axis[X] * sinr) + \
 		(p.axis[Y] * cosr);
-		i++;
-	}
-}
-
-void	check_z(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->len)
-	{
-		map->copy[i].axis[Z] /= map->resize;
 		i++;
 	}
 }

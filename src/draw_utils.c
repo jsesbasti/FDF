@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:04:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/13 01:58:47 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:45:01 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,53 +54,25 @@ int	gradient(int startcolor, int endcolor, int len, int pix)
 	return (newcolor);
 }
 
-int	draw_line(t_app *fdf, t_point start, t_point end)
+int	valid_pixel(t_point pixel)
 {
-	t_point		delta;
-	t_point		pixel;
-	int			pixels;
-	int			len;
-
-	delta.axis[X] = end.axis[X] - start.axis[X];
-	delta.axis[Y] = end.axis[Y] - start.axis[Y];
-	pixels = sqrt((delta.axis[X] * delta.axis[X]) + \
-			(delta.axis[Y] * delta.axis[Y]));
-	len = pixels;
-	delta.axis[X] /= pixels;
-	delta.axis[Y] /= pixels;
-	pixel.axis[X] = start.axis[X];
-	pixel.axis[Y] = start.axis[Y];
-	while (pixels > 0)
-	{
-		pixel.color = gradient(start.color, end.color, len, len - pixels);
-		my_mlx_pixel_put(&fdf->bitmap, pixel.axis[X], \
-			pixel.axis[Y], pixel.color);
-		pixel.axis[X] += delta.axis[X];
-		pixel.axis[Y] += delta.axis[Y];
-		pixels = pixels - 1;
-	}
-	return (0);
+	if (pixel.axis[X] < 0 || pixel.axis[X] >= WIDTH)
+		return (0);
+	if (pixel.axis[Y] < 0 || pixel.axis[Y] >= HEIGHT)
+		return (0);
+	return (1);
 }
 
-void	check_points(t_app *fdf)
+void	resize_z(int key, t_map *map)
 {
-	int	i;
-
-	i = 0;
-	redraw(fdf);
-	create_copy(fdf);
-	check_z(&fdf->map);
-	rotate(&fdf->map);
-	resize(&fdf->map);
-	while (i < fdf->map.len)
+	if (key == 126 && map->nlim < 5)
 	{
-		if ((i + 1 < fdf->map.len) && (fdf->map.points[i].axis[Y] == \
-			fdf->map.points[i + 1].axis[Y]))
-			draw_line(fdf, fdf->map.copy[i], fdf->map.copy[i + 1]);
-		if ((i + fdf->map.limits.axis[X]) < fdf->map.len)
-			draw_line(fdf, fdf->map.copy[i], \
-				fdf->map.copy[i + (int)fdf->map.limits.axis[X]]);
-		i++;
+		map->resizez *= 0.95;
+		map->nlim++;
 	}
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bitmap.img, 0, 0);
+	if (key == 125 && map->nlim > -50)
+	{
+		map->resizez /= 0.95;
+		map->nlim--;
+	}
 }

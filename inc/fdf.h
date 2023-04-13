@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:11:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/04/13 05:49:22 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:41:12 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,22 @@ typedef struct s_point
 	int		paint;
 }	t_point;
 
+typedef struct s_events
+{
+	float		angle[3];
+	float		new_center[2];
+}	t_events;
+
 typedef struct s_map
 {
 	t_point	limits;
 	t_point	*points;
 	t_point *copy;
 	int		len;
+	int		nlim;
 	int		zmin;
 	float	res;
-	float	resize;
+	float	resizez;
 	float	transx;
 	float	transy;
 	char	*mem;
@@ -66,21 +73,28 @@ typedef struct s_map
 
 typedef struct s_app
 {
-	void	*mlx;
-	void	*win;
-	float	last_y;
-	float	last_x;
-	int		button_pressed;
-	int		event;
-	int		key;
-	int		inv;
-	t_map	map;
-	t_data	bitmap;
+	void		*mlx;
+	void		*win;
+	float		last_y;
+	float		last_x;
+	float		shift_x;
+	float		shift_y;
+	int			button_pressed;
+	int			event;
+	int			key;
+	int			inv;
+	t_map		map;
+	t_data		bitmap;
+	t_events	evnt;
 }	t_app;
+
+int		valid_pixel(t_point pixel);
 
 void	check_cntrl(int key, t_app *fdf);
 
-int		esc(int key, t_app *fdf);
+int		esc_up(int key, t_app *fdf);
+
+int		esc_down(int key, t_app *fdf);
 
 int		close_app(t_app *fdf);
 
@@ -88,7 +102,7 @@ void	iso(t_app *fdf);
 
 void	orto(t_app *fdf);
 
-int		add_rot(t_app *fdf);
+int		add_rot(int key, t_app *fdf);
 
 int		start_map(t_map *map, char *file);
 
@@ -129,6 +143,8 @@ int		gradient(int startcolor, int endcolor, int len, int pix);
 void	rotate(t_map *map);
 
 void	check_z(t_map *map);
+
+void	calculate_delta(t_point *delta, t_point *pixel, t_point *start, int	pixels);
 
 void	resize_z(int key, t_map *map);
 
